@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Cody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z4b-7d-PcE">
+                                <rect key="frame" x="0.0" y="114" width="600" height="409"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6G-eu-88T">
+                                <rect key="frame" x="247" y="91" width="106" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="106" id="fb7-zz-J4X"/>
+                                </constraints>
+                                <state key="normal" title="Check"/>
+                                <connections>
+                                    <action selector="PressBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ylJ-J1-tnl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a code at cody.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4S-eM-MOX">
+                                <rect key="frame" x="171" y="20" width="257" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="dPe-qf-y1h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code here.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edH-Hz-xJj">
+                                <rect key="frame" x="209" y="53" width="181" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="181" id="Z8T-62-XvA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j6G-eu-88T" firstAttribute="top" secondItem="edH-Hz-xJj" secondAttribute="bottom" constant="8" symbolic="YES" id="0eQ-7T-mw1"/>
+                            <constraint firstItem="z4b-7d-PcE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="114" id="2eP-du-jyR"/>
+                            <constraint firstItem="j6G-eu-88T" firstAttribute="centerX" secondItem="edH-Hz-xJj" secondAttribute="centerX" id="8EU-Dy-KPd"/>
+                            <constraint firstItem="z4b-7d-PcE" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-77" id="Co0-4a-Ubs"/>
+                            <constraint firstItem="z4b-7d-PcE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="aHS-BC-CMA"/>
+                            <constraint firstItem="edH-Hz-xJj" firstAttribute="top" secondItem="T4S-eM-MOX" secondAttribute="bottom" constant="12" id="b7F-ko-QDU"/>
+                            <constraint firstItem="edH-Hz-xJj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bym-WZ-Mo3"/>
+                            <constraint firstItem="z4b-7d-PcE" firstAttribute="centerX" secondItem="edH-Hz-xJj" secondAttribute="centerX" id="fuq-F7-go4"/>
+                            <constraint firstItem="T4S-eM-MOX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="k9b-0N-sZj"/>
+                            <constraint firstItem="edH-Hz-xJj" firstAttribute="centerX" secondItem="T4S-eM-MOX" secondAttribute="centerX" id="zlV-m6-X5v"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ACbutton" destination="j6G-eu-88T" id="bnJ-ym-4At"/>
+                        <outlet property="codyView" destination="z4b-7d-PcE" id="AWG-du-0gY"/>
+                        <outlet property="lblInfo" destination="T4S-eM-MOX" id="etk-E6-7Km"/>
+                        <outlet property="tbCode" destination="edH-Hz-xJj" id="xvD-Xa-zDb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="215" y="439"/>
+        </scene>
+    </scenes>
+</document>
