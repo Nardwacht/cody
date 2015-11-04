@@ -35,6 +35,7 @@ class ViewController: UIViewController {
     var myTimer2 : NSTimer = NSTimer()
     var myTimer3 : NSTimer = NSTimer()
     var myTimer4 : NSTimer = NSTimer()
+    var enteredcode : Int = 0
 
     @IBAction func Opnieuwbtn(sender: AnyObject) {
         BackToMain()
@@ -86,7 +87,7 @@ class ViewController: UIViewController {
         if  (commands.count > 0){
             //data succesfully loaded
             usedCode = commands[0]
-            lblInfo.text = "Verbonden met '" + usedCode + "'"
+            lblInfo.text = "Verbonden met code '" + String(enteredcode) + "'"
             tbCode.hidden = true
             ACbutton.hidden = true;
             secondAction = true
@@ -211,8 +212,10 @@ class ViewController: UIViewController {
         if (secondAction == false){
             if (tbCode.text?.isEmpty == false){
             //TODO Check code.
-            var urlstring: String = "http://i329453.iris.fhict.nl/sm32/json/"
+            var urlstring: String = "http://www.blue90.nl/nard/cody/json/" //http://i329453.iris.fhict.nl/sm32/json/"
+                let txt : String = tbCode.text!
             urlstring += tbCode.text!
+                enteredcode = Int(txt)!
             urlstring += ".json"
             defurl = urlstring
                 self.loadJsonData(defurl)
