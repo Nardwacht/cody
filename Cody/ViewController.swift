@@ -31,7 +31,14 @@ class ViewController: UIViewController {
     var secondlastCommand : String = "start"
     var failcount : Int = 0
     var lastfaulty : String = "none"
+    var myTimer1 : NSTimer = NSTimer()
+    var myTimer2 : NSTimer = NSTimer()
+    var myTimer3 : NSTimer = NSTimer()
+    var myTimer4 : NSTimer = NSTimer()
 
+    @IBAction func Opnieuwbtn(sender: AnyObject) {
+        BackToMain()
+    }
     //function for loading the JSON file from main cody website
     func loadJsonData(url_:String)
     {
@@ -68,6 +75,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func CorrectInitialize(){
+        print("timer")
+    }
+    
     //checks the validity of an entered code
     //parameter is a timer because parsing the json data costs time so this method is to be executed after finishing parsing
     func CheckCodeValidity(timer : NSTimer) {
@@ -77,8 +88,9 @@ class ViewController: UIViewController {
             usedCode = commands[0]
             lblInfo.text = "Verbonden met '" + usedCode + "'"
             tbCode.hidden = true
-            ACbutton.setTitle("Start", forState:UIControlState.Normal)
+            ACbutton.hidden = true;
             secondAction = true
+            myTimer4 = NSTimer.scheduledTimerWithTimeInterval(2.1, target: self, selector: Selector("AutoreloadCommandos:"), userInfo: nil, repeats: true)
             
         }
         else{
@@ -87,6 +99,30 @@ class ViewController: UIViewController {
             
         }
 
+    }
+    
+    func BackToMain(){
+        //reset
+        myTimer1.invalidate()
+        myTimer2.invalidate()
+        myTimer3.invalidate()
+        myTimer4.invalidate()
+        
+        codyView.image = UIImage.gifWithName("cody-idle")
+        secondAction = false
+        hasGreated = false
+        defurl = ""
+        usedCode = ""
+        secondlastCommand = "start"
+        failcount = 0
+        lastfaulty = "none"
+        commands.removeAll()
+        tbCode.hidden = false;
+        ACbutton.setTitle("Check", forState:UIControlState.Normal)
+        lblInfo.text = "Krijg een nieuwe code op Cody.gq"
+        ACbutton.hidden = false;
+        
+        
     }
     
     
@@ -119,7 +155,7 @@ class ViewController: UIViewController {
         if (commands.count == 1){
             if (hasGreated == false) {
             CodyTekst.text = "Hoi " + commands[0] + "!"
-                    let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("DisableTekst:"), userInfo: nil, repeats: false)
+                    myTimer1 = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("DisableTekst:"), userInfo: nil, repeats: false)
             ShowGif("cody-talking")
                 hasGreated = true
             }
@@ -158,7 +194,7 @@ class ViewController: UIViewController {
         commands.removeAll()
         self.loadJsonData(defurl)
         //executes the command after finishing parsing.
-        let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("VoerCommandoUit:"), userInfo: nil, repeats: false)
+        myTimer2 = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("VoerCommandoUit:"), userInfo: nil, repeats: false)
     }
     
     //Shows the .gif with the given name
@@ -181,10 +217,11 @@ class ViewController: UIViewController {
             defurl = urlstring
                 self.loadJsonData(defurl)
                 //checks the validity of the url after finishing parsing.
-                let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("CheckCodeValidity:"), userInfo: nil, repeats: false)
+                myTimer3 = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("CheckCodeValidity:"), userInfo: nil, repeats: false)
               
             }
         }
+            /*
         else{
             /*
             commands.removeAll()
@@ -192,9 +229,11 @@ class ViewController: UIViewController {
             //executes the command after finishing parsing.
             let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("VoerCommandoUit:"), userInfo: nil, repeats: false)
 */
-            let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(2.1, target: self, selector: Selector("AutoreloadCommandos:"), userInfo: nil, repeats: true)
+            ACbutton.setTitle("Started", forState:UIControlState.Normal)
+            
             
         }
+*/
         
     }
     
