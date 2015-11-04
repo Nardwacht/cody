@@ -30,7 +30,7 @@
                                     <action selector="PressBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ylJ-J1-tnl"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a code at cody.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4S-eM-MOX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a code at cody.gq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4S-eM-MOX">
                                 <rect key="frame" x="171" y="20" width="257" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="257" id="dPe-qf-y1h"/>
@@ -47,16 +47,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp3-5J-sQs">
+                                <rect key="frame" x="126" y="531" width="347" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="347" id="faK-r5-ZE4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="29"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="j6G-eu-88T" firstAttribute="top" secondItem="edH-Hz-xJj" secondAttribute="bottom" constant="8" symbolic="YES" id="0eQ-7T-mw1"/>
                             <constraint firstItem="z4b-7d-PcE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="114" id="2eP-du-jyR"/>
+                            <constraint firstItem="tp3-5J-sQs" firstAttribute="top" secondItem="z4b-7d-PcE" secondAttribute="bottom" constant="8" symbolic="YES" id="4xT-sg-fEL"/>
                             <constraint firstItem="j6G-eu-88T" firstAttribute="centerX" secondItem="edH-Hz-xJj" secondAttribute="centerX" id="8EU-Dy-KPd"/>
                             <constraint firstItem="z4b-7d-PcE" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-77" id="Co0-4a-Ubs"/>
+                            <constraint firstItem="tp3-5J-sQs" firstAttribute="centerX" secondItem="z4b-7d-PcE" secondAttribute="centerX" id="MQd-wZ-eIC"/>
                             <constraint firstItem="z4b-7d-PcE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="aHS-BC-CMA"/>
                             <constraint firstItem="edH-Hz-xJj" firstAttribute="top" secondItem="T4S-eM-MOX" secondAttribute="bottom" constant="12" id="b7F-ko-QDU"/>
                             <constraint firstItem="edH-Hz-xJj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bym-WZ-Mo3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tp3-5J-sQs" secondAttribute="bottom" constant="33" id="fOT-wP-QSy"/>
                             <constraint firstItem="z4b-7d-PcE" firstAttribute="centerX" secondItem="edH-Hz-xJj" secondAttribute="centerX" id="fuq-F7-go4"/>
                             <constraint firstItem="T4S-eM-MOX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="k9b-0N-sZj"/>
                             <constraint firstItem="edH-Hz-xJj" firstAttribute="centerX" secondItem="T4S-eM-MOX" secondAttribute="centerX" id="zlV-m6-X5v"/>
@@ -64,6 +76,7 @@
                     </view>
                     <connections>
                         <outlet property="ACbutton" destination="j6G-eu-88T" id="bnJ-ym-4At"/>
+                        <outlet property="CodyTekst" destination="tp3-5J-sQs" id="lA1-lI-uJr"/>
                         <outlet property="codyView" destination="z4b-7d-PcE" id="AWG-du-0gY"/>
                         <outlet property="lblInfo" destination="T4S-eM-MOX" id="etk-E6-7Km"/>
                         <outlet property="tbCode" destination="edH-Hz-xJj" id="xvD-Xa-zDb"/>

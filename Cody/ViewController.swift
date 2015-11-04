@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblInfo: UILabel!
     @IBOutlet weak var tbCode: UITextField!
     @IBOutlet weak var ACbutton: UIButton!
+    @IBOutlet weak var CodyTekst: UILabel!
     
     
     
@@ -24,8 +25,12 @@ class ViewController: UIViewController {
     var commands = [String]()
     var knownCommands = [Command]()
     var secondAction : Bool = false
+    var hasGreated : Bool = false
     var defurl : String = ""
     var usedCode : String = ""
+    var secondlastCommand : String = "start"
+    var failcount : Int = 0
+    var lastfaulty : String = "none"
 
     //function for loading the JSON file from main cody website
     func loadJsonData(url_:String)
@@ -72,7 +77,7 @@ class ViewController: UIViewController {
             usedCode = commands[0]
             lblInfo.text = "Verbonden met '" + usedCode + "'"
             tbCode.hidden = true
-            ACbutton.setTitle("Voer uit", forState:UIControlState.Normal)
+            ACbutton.setTitle("Start", forState:UIControlState.Normal)
             secondAction = true
             
         }
@@ -92,25 +97,74 @@ class ViewController: UIViewController {
         
         if (commands.count > 0){
             let lastcmd : String = commands[commands.count-1]
-            for cmd in knownCommands
-            {
-                if (lastcmd == cmd.command){
-                    ShowGif(cmd.gifname)
-                    foundOne = true
+            if (secondlastCommand == lastcmd) {
+                codyView.image = UIImage.gifWithName("cody-idle")
+                foundOne = true;
+            }
+            else{
+                for cmd in knownCommands
+                {
+                    if (lastcmd == cmd.command){
+                        secondlastCommand = lastcmd;
+                        ShowGif(cmd.gifname)
+                        foundOne = true
+                    }
                 }
             }
+
         }
-        
+        let lastcmdt : String = commands[commands.count-1]
+        print("~ "+lastcmdt)
         //if there is no command show the 'i don't know this command'.
-        if (foundOne == false){
-            ShowGif("cody-vraagteken")
+        if (commands.count == 1){
+            if (hasGreated == false) {
+            CodyTekst.text = "Hoi " + commands[0] + "!"
+                    let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("DisableTekst:"), userInfo: nil, repeats: false)
+            ShowGif("cody-talking")
+                hasGreated = true
+            }
+            else{
+                codyView.image = UIImage.gifWithName("cody-idle")
+            }
         }
+        else if (foundOne == false){
+            print(secondlastCommand)
+            if (secondlastCommand == "cody-vraagteken" + String(failcount)) {
+                if (lastfaulty == commands[commands.count-1]){
+                codyView.image = UIImage.gifWithName("cody-idle")
+                }
+                else{
+                    lastfaulty = commands[commands.count-1]
+                    failcount++;
+                    secondlastCommand = "cody-vraagteken" + String(failcount)
+                    ShowGif("cody-vraagteken")
+                }
+            }
+            else{
+                lastfaulty = commands[commands.count-1]
+                failcount++;
+                secondlastCommand = "cody-vraagteken" + String(failcount)
+                ShowGif("cody-vraagteken")
+            }
+            
+        }
+    }
+    
+    func DisableTekst(timer : NSTimer){
+        CodyTekst.text = ""
+    }
+    
+    func AutoreloadCommandos(timer : NSTimer){
+        commands.removeAll()
+        self.loadJsonData(defurl)
+        //executes the command after finishing parsing.
+        let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("VoerCommandoUit:"), userInfo: nil, repeats: false)
     }
     
     //Shows the .gif with the given name
     func ShowGif(gifname : String){
         codyView.image = UIImage.gifWithName(gifname)
-        print("here")
+        
     }
     
     //event occurs when the user presses the only button in the view
@@ -132,10 +186,13 @@ class ViewController: UIViewController {
             }
         }
         else{
+            /*
             commands.removeAll()
             self.loadJsonData(defurl)
             //executes the command after finishing parsing.
             let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("VoerCommandoUit:"), userInfo: nil, repeats: false)
+*/
+            let myTimer : NSTimer = NSTimer.scheduledTimerWithTimeInterval(2.1, target: self, selector: Selector("AutoreloadCommandos:"), userInfo: nil, repeats: true)
             
         }
         
@@ -153,7 +210,7 @@ class ViewController: UIViewController {
         // set the default gif to play when starting the app.
         codyView.image = UIImage.gifWithName("cody-idle")
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         
     }
